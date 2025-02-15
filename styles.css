@@ -74,63 +74,51 @@ body {
     overflow: hidden;
     border-right: 3px solid #8B0000;
 }
-/* === CORAZONES FLOTANTES === */
-
+/* === CORAZONES FLOTANTES (VERSIÓN CORREGIDA) === */
 .hearts-container {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    pointer-events: none;
-    z-index: 9999;
-    overflow: visible !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
-
-
-.history, .traits, .invitation {
-    position: relative;
-    z-index: 0;
-    background: transparent !important; /* Asegurar fondo sólido */
-  }
-
- 
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  animation: float 6s infinite linear;
+  opacity: 0.8;
+}
 
 .heart::before,
 .heart::after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 20px;
-    background: #ff1493;
-    border-radius: 15px 15px 0 0;
-    transform-origin: 0 100%;
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  background: #8B0000;
+  border-radius: 10px 10px 0 0;
 }
 
 .heart::before {
-    left: 12px;
-    transform: rotate(-45deg);
+  left: 10px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
 }
 
 .heart::after {
-    left: 0;
-    transform: rotate(45deg);
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(110vh) rotate(0deg);
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 15px #ff4081);
-    }
-    100% {
-        transform: translateY(-10vh) rotate(720deg);
-        opacity: 0;
-    }
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
 }
 
 /* Timeline */
@@ -659,10 +647,10 @@ body {
   }
 .love-letter {
     position: relative;
-    max-width: 90%;
+    max-width: 95%;
     text-align: center; /* Centra el texto */
     margin: 0 auto; /* Centrado adicional */
-    padding: 2rem; /* Más espacio interno */
+    padding: 1rem; /* Más espacio interno */
 
 }
   .wax-seal {
@@ -737,11 +725,11 @@ body {
 
   .message-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     position: relative;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     color: white; /* Faltaba definir color */
 }
   .message-title::after {
@@ -789,15 +777,19 @@ body {
     height: 25px;
     /* Nuevo: Posición horizontal inicial aleatoria */
     left: calc(100vw * var(--random-x));
+
+    display: block;
+    overflow: visible;
+    z-index: 9999;
 }
 
 
   .confirm-btn {
     background: linear-gradient(45deg, #ffffff, #ffe8f0);
     border: none;
-    padding: 1.2rem 2.5rem;
+    padding: 0.8rem 1.5rem;
     color: #8b0000;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -805,7 +797,7 @@ body {
     align-items: center;
     gap: 1rem;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    margin: 0 auto;
+    margin: 1rem auto;
 }
   
   .confirm-btn:hover {
@@ -851,11 +843,15 @@ body {
   }
 
   .message-container {
+    overflow-y: auto; /* Permitir scroll vertical */
+    max-height: 500px; /* Altura máxima antes de scroll */
     position: relative;
     z-index: 2;
     padding: 2rem;
     background: rgba(0, 0, 0, 0.6) !important; /* Mayor contraste */
     border-radius: 15px;
+    padding: 1rem 2rem;
+    margin: 0 auto;
   }
 
   canvas {

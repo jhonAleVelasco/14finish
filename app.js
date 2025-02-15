@@ -1,10 +1,10 @@
 // app.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicialización de efectos
-    initTypingEffect();
-    createHearts(30);
-    initScrollReveal();
-    initNovaCard();
+  // Inicialización de efectos
+  initTypingEffect();
+  createHearts(50); // Cambiado a 50 corazones
+  initScrollReveal();
+  initNovaCard();
 });
 
 function initTypingEffect() {
@@ -27,28 +27,33 @@ function initTypingEffect() {
 // JavaScript actualizado - Reemplaza tu función createHearts
 // ACTUALIZAR LA FUNCIÓN createHearts EN TU JS
 function createHearts(quantity) {
-    const container = document.querySelector('.hearts-container');
-    container.innerHTML = '';
-    
-    for (let i = 0; i < quantity; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        
-        // Posición horizontal aleatoria (0-95% para evitar salir de pantalla)
-        heart.style.setProperty('--random-x', Math.random() * 0.95);
-        
-        // Retraso y duración aleatoria
-        heart.style.animationDelay = `${Math.random() * 4}s`;
-        heart.style.animationDuration = `${6 + Math.random() * 4}s`;
-        
-        // Tamaño aleatorio entre 15px y 30px
-        const size = 15 + Math.random() * 15;
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        
-        container.appendChild(heart);
-    }
+  const container = document.getElementById('heartsContainer');
+  container.innerHTML = '';
+  
+  for(let i = 0; i < quantity; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      
+      // Posición horizontal aleatoria
+      heart.style.left = `${Math.random() * 100}%`;
+      
+      // Retraso de animación escalonado
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      
+      // Tamaño aleatorio
+      const size = 15 + Math.random() * 15;
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      
+      // Velocidad de animación variable
+      heart.style.animationDuration = `${6 + Math.random() * 4}s`;
+      
+      container.appendChild(heart);
+  }
 }
+
+// Inicializar con 30 corazones
+createHearts(30);
 
 function initScrollReveal() {
     ScrollReveal().reveal('.timeline-item, .trait-card', {
